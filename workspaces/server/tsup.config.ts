@@ -8,7 +8,7 @@ export default defineConfig(async (): Promise<Options[]> => {
   const PACKAGE_DIR = (await findPackageDir(process.cwd()))!;
   const OUTPUT_DIR = path.resolve(PACKAGE_DIR, './dist');
 
-  const isProduction = process.env['NODE_ENV'] === 'production';
+  // const isProduction = process.env['NODE_ENV'] === 'production';
 
   return [
     {
@@ -24,11 +24,11 @@ export default defineConfig(async (): Promise<Options[]> => {
       },
       format: 'cjs',
       metafile: true,
-      minify: isProduction,
+      minify: true,
       noExternal: [/@wsh-2024\/.*/],
       outDir: OUTPUT_DIR,
       shims: true,
-      sourcemap: !isProduction,
+      sourcemap: false,
       splitting: false,
       target: 'node18',
     },
