@@ -2,7 +2,7 @@
   "private": true,
   "license": "MPL-2.0",
   "scripts": {
-    "build": "pnpm --filter \"@wsh-2024/client\" --filter \"@wsh-2024/server\" --parallel run build",
+    "build": "npx --package dotenv -e .env -- pnpm --filter \"@wsh-2024/client\" --filter \"@wsh-2024/server\" --parallel run build",
     "format": "pnpm run format:eslint && pnpm run format:prettier",
     "format:eslint": "eslint --fix --ext mts,cts,ts,tsx,mjs,cjs,js,jsx . || true",
     "format:prettier": "prettier --ignore-path .prettierignore --write '**/*.{mts,cts,ts,tsx,mjs,cjs,js,jsx,json}'",
@@ -10,9 +10,9 @@
     "lint:eslint": "eslint --ext mts,cts,ts,tsx,mjs,cjs,js,jsx .",
     "lint:prettier": "prettier --ignore-path .prettierignore --check '**/*.{mts,cts,ts,tsx,mjs,cjs,js,jsx,json}'",
     "lint:tsc": "tsc --noEmit",
-    "start": "pnpm --filter \"@wsh-2024/server\" run start",
-    "test": "pnpm --filter \"@wsh-2024/testing\" run start",
-    "test:debug": "pnpm --filter \"@wsh-2024/testing\" run start:debug"
+    "start": "npx --package dotenv -e .env -- pnpm --filter \"@wsh-2024/server\" run start",
+    "test": "npx --package dotenv -e .env -- pnpm --filter \"@wsh-2024/testing\" run start",
+    "test:debug": "npx --package dotenv -e .env -- pnpm --filter \"@wsh-2024/testing\" run start:debug"
   },
   "devDependencies": {
     "@3846masa/configs": "github:3846masa/configs#0e9352c7ad57e51187647f2c4aa27baea842d149",

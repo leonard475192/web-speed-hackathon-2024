@@ -22,3 +22,7 @@
     - :warning: **万が一コストが発生した場合は、全て自己負担となります**
   - Koyeb.com 外へのデプロイについて、運営からサポートしません
   - デプロイ方法がわからない方は Koyeb.com で立ち上げることをオススメします
+
+## memo
+
+- [Koyeb Console](https://app.koyeb.com/apps/34f22e33-f1ff-4150-bf1a-33824970f900/services/7d473656-b4bf-462f-b128-b29679f2f71c)
