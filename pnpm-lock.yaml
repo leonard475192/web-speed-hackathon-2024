@@ -83,6 +83,9 @@ importers:
       underscore:
         specifier: 1.13.6
         version: 1.13.6
+      unicode-collation-algorithm2:
+        specifier: 0.5.0
+        version: 0.5.0
       yup:
         specifier: 1.4.0
         version: 1.4.0

@@ -23,6 +23,7 @@ import _ from 'underscore';
 import { create } from 'zustand';
 
 import { useAuthorList } from '../../features/authors/hooks/useAuthorList';
+import { isContains } from '../../lib/filter/isContains';
 
 import { AuthorDetailModal } from './internal/AuthorDetailModal';
 import { CreateAuthorModal } from './internal/CreateAuthorModal';
@@ -83,8 +84,7 @@ export const AuthorListPage: React.FC = () => {
       }
       case AuthorSearchKind.AuthorName: {
         return authorList.filter((author) => {
-          return Boolean(author.name);
-          // return isContains({ query: formik.values.query, target: author.name });
+          return isContains({ query: formik.values.query, target: author.name });
         });
       }
       default: {
