@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { useState } from 'react';
-import { useInterval, useUpdate } from 'react-use';
+import { useEffect, useState } from 'react';
+import { useWindowSize } from 'react-use';
 import styled from 'styled-components';
 
 import { ComicViewerCore } from '../../../features/viewer/components/ComicViewerCore';
@@ -24,7 +24,7 @@ const _Wrapper = styled.div<{
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
-  max-height: ${({ $maxHeight }) => addUnitIfNeeded($maxHeight)};
+  height: ${({ $maxHeight }) => addUnitIfNeeded($maxHeight)};
   overflow: hidden;
 `;
 
@@ -34,25 +34,29 @@ type Props = {
 
 export const ComicViewer: React.FC<Props> = ({ episodeId }) => {
   // 画面のリサイズに合わせて再描画する
-  const rerender = useUpdate();
-  useInterval(rerender, 0);
+  // const rerender = useUpdate();
+  // useInterval(rerender, 0);
 
-  const [el, ref] = useState<HTMLDivElement | null>(null);
+  // const [el, ref] = useState<HTMLDivElement | null>(null);
+  const [viewerHeight, setViewerHeight] = useState<number>(MAX_VIEWER_HEIGHT);
+  const { width } = useWindowSize();
 
-  // コンテナの幅
-  const cqw = (el?.getBoundingClientRect().width ?? 0) / 100;
+  useEffect(() => {
+    // コンテナの幅
+    const cqw = width / 100;
 
-  // 1画面に表示できるページ数（1 or 2）
-  const pageCountParView = 100 * cqw <= 2 * MIN_PAGE_WIDTH ? 1 : 2;
-  // 1ページの幅の候補
-  const candidatePageWidth = (100 * cqw) / pageCountParView;
-  // 1ページの高さの候補
-  const candidatePageHeight = (candidatePageWidth / IMAGE_WIDTH) * IMAGE_HEIGHT;
-  // ビュアーの高さ
-  const viewerHeight = _.clamp(candidatePageHeight, MIN_VIEWER_HEIGHT, MAX_VIEWER_HEIGHT);
+    // 1画面に表示できるページ数（1 or 2）
+    const pageCountParView = 100 * cqw <= 2 * MIN_PAGE_WIDTH ? 1 : 2;
+    // 1ページの幅の候補
+    const candidatePageWidth = (100 * cqw) / pageCountParView;
+    // 1ページの高さの候補
+    const candidatePageHeight = (candidatePageWidth / IMAGE_WIDTH) * IMAGE_HEIGHT;
+    // ビュアーの高さ
+    setViewerHeight(_.clamp(candidatePageHeight, MIN_VIEWER_HEIGHT, MAX_VIEWER_HEIGHT));
+  }, [width]);
 
   return (
-    <_Container ref={ref}>
+    <_Container>
       <_Wrapper $maxHeight={viewerHeight}>
         <ComicViewerCore episodeId={episodeId} />
       </_Wrapper>
