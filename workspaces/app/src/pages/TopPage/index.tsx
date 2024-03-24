@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment-timezone';
-import { Suspense, useId } from 'react';
+import { useId } from 'react';
 
 import { BookCard } from '../../features/book/components/BookCard';
 import { FeatureCard } from '../../features/feature/components/FeatureCard';
@@ -83,12 +83,4 @@ const TopPage: React.FC = () => {
   );
 };
 
-const TopPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <TopPage />
-    </Suspense>
-  );
-};
-
-export { TopPageWithSuspense as TopPage };
+export { TopPage };

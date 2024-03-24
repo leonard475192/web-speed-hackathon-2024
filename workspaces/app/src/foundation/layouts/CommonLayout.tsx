@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,10 +14,12 @@ const _Content = styled.div`
 export const CommonLayout: React.FC = () => {
   return (
     <Container>
-      <_Content>
-        <Outlet />
-      </_Content>
-      <Footer />
+      <Suspense fallback={null}>
+        <_Content>
+          <Outlet />
+        </_Content>
+        <Footer />
+      </Suspense>
     </Container>
   );
 };
