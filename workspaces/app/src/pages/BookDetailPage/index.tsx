@@ -30,8 +30,8 @@ const _HeadingWrapper = styled.section`
 `;
 
 const _ImgWrapper = styled.div`
-  width: 256px;
-  height: 192px;
+  width: 192px;
+  height: 256px;
 `;
 
 const _AuthorWrapper = styled(Link)`
