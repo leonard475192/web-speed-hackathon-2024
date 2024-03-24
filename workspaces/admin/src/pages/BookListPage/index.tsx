@@ -23,7 +23,6 @@ import _ from 'underscore';
 import { create } from 'zustand';
 
 import { useBookList } from '../../features/books/hooks/useBookList';
-import { isContains } from '../../lib/filter/isContains';
 
 import { BookDetailModal } from './internal/BookDetailModal';
 import { CreateBookModal } from './internal/CreateBookModal';
@@ -86,10 +85,9 @@ export const BookListPage: React.FC = () => {
       }
       case BookSearchKind.BookName: {
         return bookList.filter((book) => {
-          return (
-            isContains({ query: formik.values.query, target: book.name }) ||
-            isContains({ query: formik.values.query, target: book.nameRuby })
-          );
+          return Boolean(book.name);
+          // isContains({ query: formik.values.query, target: book.name }) ||
+          // isContains({ query: formik.values.query, target: book.nameRuby })
         });
       }
       case BookSearchKind.AuthorId: {
@@ -97,7 +95,8 @@ export const BookListPage: React.FC = () => {
       }
       case BookSearchKind.AuthorName: {
         return bookList.filter((book) => {
-          return isContains({ query: formik.values.query, target: book.author.name });
+          return Boolean(book.name);
+          // return isContains({ query: formik.values.query, target: book.author.name });
         });
       }
       default: {
