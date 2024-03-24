@@ -14,7 +14,7 @@ import type { PatchBookRequestParams } from '@wsh-2024/schema/src/api/books/Patc
 import type { PatchBookResponse } from '@wsh-2024/schema/src/api/books/PatchBookResponse';
 import type { PostBookRequestBody } from '@wsh-2024/schema/src/api/books/PostBookRequestBody';
 import type { PostBookResponse } from '@wsh-2024/schema/src/api/books/PostBookResponse';
-import { author, book, episode, episodePage, feature, ranking } from '@wsh-2024/schema/src/models';
+import { book, episode, episodePage, feature, ranking } from '@wsh-2024/schema/src/models';
 
 import { getDatabase } from '../database/drizzle';
 
@@ -98,15 +98,9 @@ class BookRepository implements BookRepositoryInterface {
         orderBy(book, { asc }) {
           return asc(book.createdAt);
         },
-        where(book, { eq, like }) {
+        where(book, { eq }) {
           if (options.query.authorId != null) {
             return eq(book.authorId, options.query.authorId);
-          }
-          if (options.query.authorName != null) {
-            return like(author.name, `%${options.query.authorName}%`);
-          }
-          if (options.query.name != null) {
-            return like(book.name, `%${options.query.name}%`);
           }
           return;
         },
