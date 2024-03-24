@@ -1,4 +1,4 @@
-import { Suspense, useId } from 'react';
+import { useId } from 'react';
 import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
 import { styled } from 'styled-components';
@@ -43,11 +43,11 @@ const AuthorDetailPage: React.FC = () => {
   return (
     <Box height="100%" px={Space * 2}>
       <_HeadingWrapper aria-label="作者情報">
-        {imageUrl != null && (
-          <_AuthorImageWrapper>
+        <_AuthorImageWrapper>
+          {imageUrl != null && (
             <Image key={author.id} alt={author.name} height={128} objectFit="cover" src={imageUrl} width={128} />
-          </_AuthorImageWrapper>
-        )}
+          )}{' '}
+        </_AuthorImageWrapper>
 
         <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
           <Text color={Color.MONO_100} typography={Typography.NORMAL20} weight="bold">
@@ -86,12 +86,4 @@ const AuthorDetailPage: React.FC = () => {
   );
 };
 
-const AuthorDetailPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <AuthorDetailPage />
-    </Suspense>
-  );
-};
-
-export { AuthorDetailPageWithSuspense as AuthorDetailPage };
+export { AuthorDetailPage };

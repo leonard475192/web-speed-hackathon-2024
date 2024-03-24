@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai/react';
-import { Suspense, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
 import { styled } from 'styled-components';
@@ -27,6 +27,11 @@ const _HeadingWrapper = styled.section`
   grid-template-columns: auto 1fr;
   padding-bottom: ${Space * 2}px;
   gap: ${Space * 2}px;
+`;
+
+const _ImgWrapper = styled.div`
+  width: 192px;
+  height: 256px;
 `;
 
 const _AuthorWrapper = styled(Link)`
@@ -66,9 +71,11 @@ const BookDetailPage: React.FC = () => {
   return (
     <Box height="100%" position="relative" px={Space * 2}>
       <_HeadingWrapper aria-label="作品情報">
-        {bookImageUrl != null && (
-          <Image alt={book.name} height={256} objectFit="cover" src={bookImageUrl} width={192} />
-        )}
+        <_ImgWrapper>
+          {bookImageUrl != null && (
+            <Image alt={book.name} height={256} objectFit="cover" src={bookImageUrl} width={192} />
+          )}
+        </_ImgWrapper>
         <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-end">
           <Box>
             <Text color={Color.MONO_100} typography={Typography.NORMAL20} weight="bold">
@@ -83,11 +90,12 @@ const BookDetailPage: React.FC = () => {
           <Spacer height={Space * 1} />
 
           <_AuthorWrapper href={`/authors/${book.author.id}`}>
-            {auhtorImageUrl != null && (
-              <_AvatarWrapper>
+            <_AvatarWrapper>
+              {auhtorImageUrl != null && (
                 <Image alt={book.author.name} height={32} objectFit="cover" src={auhtorImageUrl} width={32} />
-              </_AvatarWrapper>
-            )}
+              )}
+            </_AvatarWrapper>
+
             <Text color={Color.MONO_100} typography={Typography.NORMAL14}>
               {book.author.name}
             </Text>
@@ -123,12 +131,4 @@ const BookDetailPage: React.FC = () => {
   );
 };
 
-const BookDetailPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <BookDetailPage />
-    </Suspense>
-  );
-};
-
-export { BookDetailPageWithSuspense as BookDetailPage };
+export { BookDetailPage };
