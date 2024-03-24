@@ -63,11 +63,9 @@ const RankingCard: React.FC<Props> = ({ book }) => {
       <_Link href={`/books/${book.id}`}>
         <Spacer height={Space * 1.5} />
         <Flex align="flex-start" gap={Space * 2.5} justify="flex-start">
-          {imageUrl != null && (
-            <_ImgWrapper>
-              <Image alt={book.name} height={96} objectFit="cover" src={imageUrl} width={96} />
-            </_ImgWrapper>
-          )}
+          <_ImgWrapper>
+            {imageUrl != null && <Image alt={book.name} height={96} objectFit="cover" src={imageUrl} width={96} />}{' '}
+          </_ImgWrapper>
           <Box width="100%">
             <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-start">
               <Text color={Color.MONO_100} typography={Typography.NORMAL16} weight="bold">
@@ -81,8 +79,8 @@ const RankingCard: React.FC<Props> = ({ book }) => {
             <Spacer height={Space * 1} />
 
             <Flex align="center" gap={Space * 1} justify="flex-end">
-              {authorImageUrl != null && (
-                <_AvatarWrapper>
+              <_AvatarWrapper>
+                {authorImageUrl != null && (
                   <Image
                     alt={`${book.author.name}のアイコン`}
                     height={32}
@@ -90,8 +88,8 @@ const RankingCard: React.FC<Props> = ({ book }) => {
                     src={authorImageUrl}
                     width={32}
                   />
-                </_AvatarWrapper>
-              )}
+                )}
+              </_AvatarWrapper>
               <Text color={Color.MONO_80} typography={Typography.NORMAL12}>
                 {book.author.name}
               </Text>
