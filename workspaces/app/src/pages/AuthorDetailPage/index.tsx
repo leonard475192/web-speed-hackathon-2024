@@ -1,4 +1,4 @@
-import { Suspense, useId } from 'react';
+import { useId } from 'react';
 import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
 import { styled } from 'styled-components';
@@ -86,12 +86,4 @@ const AuthorDetailPage: React.FC = () => {
   );
 };
 
-const AuthorDetailPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <AuthorDetailPage />
-    </Suspense>
-  );
-};
-
-export { AuthorDetailPageWithSuspense as AuthorDetailPage };
+export { AuthorDetailPage };

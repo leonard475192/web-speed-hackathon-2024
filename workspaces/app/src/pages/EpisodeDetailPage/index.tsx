@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import type { RouteParams } from 'regexparam';
 import invariant from 'tiny-invariant';
@@ -38,12 +37,4 @@ const EpisodeDetailPage: React.FC = () => {
   );
 };
 
-const EpisodeDetailPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <EpisodeDetailPage />
-    </Suspense>
-  );
-};
-
-export { EpisodeDetailPageWithSuspense as EpisodeDetailPage };
+export { EpisodeDetailPage };
