@@ -1,6 +1,5 @@
-import { Suspense, useCallback, useEffect, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 
-import { useBookList } from '../../features/book/hooks/useBookList';
 import { Box } from '../../foundation/components/Box';
 import { Text } from '../../foundation/components/Text';
 import { Color, Space, Typography } from '../../foundation/styles/variables';
@@ -9,8 +8,6 @@ import { Input } from './internal/Input';
 import { SearchResult } from './internal/SearchResult';
 
 const SearchPage: React.FC = () => {
-  const { data: books } = useBookList({ query: {} });
-
   const searchResultsA11yId = useId();
 
   const [isClient, setIsClient] = useState(false);
@@ -34,18 +31,10 @@ const SearchPage: React.FC = () => {
         <Text color={Color.MONO_100} id={searchResultsA11yId} typography={Typography.NORMAL20} weight="bold">
           検索結果
         </Text>
-        {keyword !== '' && <SearchResult books={books} keyword={keyword} />}
+        {keyword !== '' && <SearchResult keyword={keyword} />}
       </Box>
     </Box>
   );
 };
 
-const SearchPageWithSuspense: React.FC = () => {
-  return (
-    <Suspense fallback={null}>
-      <SearchPage />
-    </Suspense>
-  );
-};
-
-export { SearchPageWithSuspense as SearchPage };
+export { SearchPage };
